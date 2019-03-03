@@ -1,0 +1,42 @@
+.About {
+    text-align: center;  
+}
+
+  
+  .About ul.movies {
+    display: flex;
+    margin: 0 auto;
+    width: 50%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  .About li.movie {
+    display: grid;
+  }
+  
+  
+  .About img {
+    margin: 0 auto;
+    width: 200px;
+    max-height: 300px;
+  }
+  
+  .About button{  
+    width: 60%;
+    margin:0 auto;
+    border: 2px solid dodgerblue;
+    text-align: center;  
+    font-size: 14px;
+    background: dodgerblue;
+    color: white;
+    border-radius: 7px;
+    margin-top: 20px; 
+    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5); 
+    padding: 10px 20px;
+  }
+  
+  .About button:hover{
+    color: dodgerblue;
+    background: transparent;
+  }
