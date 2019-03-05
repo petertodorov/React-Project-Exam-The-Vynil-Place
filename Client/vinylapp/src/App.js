@@ -38,7 +38,8 @@ class App extends Component {
     })
     .then(rawData => rawData.json())
     .then((data) => {
-      console.log(data);
+
+      console.log(data.userData);
 
       if(data.success){
         toast.success(data.message);

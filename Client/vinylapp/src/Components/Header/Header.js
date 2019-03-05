@@ -2,9 +2,6 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router,  NavLink,  Switch } from 'react-router-dom';
 
 const Header = (props) => {
- console.log(props.user.isLoggedIn);
- console.log(props.user.isAdmin);
-
     return (
 
         <header>
