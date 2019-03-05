@@ -6,7 +6,7 @@ import Header from './Components/Header/Header'
 import Login from './Views/Login/Login'
 import Register from './Views/Register/Register'
 import NotFound from './Views/NotFound/NotFound';
-
+import AuthService from './services/authService'
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -16,107 +16,83 @@ class App extends Component {
     super(props);
     this.state = {
       user: {
-        isLoggedIn: false,
+        isLoggedIn: '',
         username: '',
         userId: '',
         token: '',
-        isAdmin: false
+        isAdmin: ''
       }
     }
-
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
   }
+  static authService = new AuthService();
 
-   login(user) { 
-   fetch('http://localhost:5000/auth/signin', {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    .then(rawData => rawData.json())
-    .then((data) => {
+  updateState(token) {
+    if (token) {
+    this.setState({
+        user: {
+          token: token,
+          isLoggedIn: !!token.length,
+          username: localStorage.getItem('username'),
+          userId: localStorage.getItem('userId'),
+          isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
+        },
+      });
+    return true
+    }else{
+      this.setState({
+        user: {
+          isLoggedIn: false,
+          username: '',
+          userId: '',
+          token: '',
+          isAdmin: false,
+        },
+      });
+    return false;
+    }
+  }
 
-      console.log(data.userData);
-
-      if(data.success){
-        toast.success(data.message);
-      }
-
-      if(!data.success){
+  async login(user) {
+    try {
+      let data = await App.authService.signIn(user);
+      if (!data.success || !data.userData.username) {
         toast.error(data.message);
         return;
       }
-      
-        if(!data.token || !data.userData.username ) {
-          toast.error('404 Not Found no such user');
-          return;
-        }
-        
-
-        
+      if (data.token) {
+        localStorage.setItem('token', data.token);
         localStorage.setItem('username', data.userData.username);
         localStorage.setItem('userId', data.userData.userId);
-        localStorage.setItem('token', data.token);
-        localStorage.setItem('isAdmin',data.userData.isAdmin);
-
-        this.setState({
-          user: {
-            isLoggedIn: true,
-            username: data.userData.username,
-            userId: data.userData.userId,
-            token: data.token,
-            isAdmin: data.userData.isAdmin,
-          },
-        });      
-      })
-      .catch((error)=>console.log(`login error: ${error}`));
+        localStorage.setItem('isAdmin', data.userData.isAdmin);
+        this.updateState(data.token)
+      } else {
+        toast.error('No such user, please try again')
+      }
+      toast.success(data.message);
+    } catch (error) {
+      console.log(`Server cannot log in the user, please try again`)
+    }
   }
 
   logout(event) {
     event.preventDefault();
-
-    localStorage.removeItem('username');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('token');
-    localStorage.removeItem('isAdmin');
-
-    this.setState({
-      user: {
-        isLoggedIn: false,
-        username: '',
-        userId: '',
-        token: '',
-        isAdmin: false,
-      },
-    });
-
-    toast.success("Logout successful!");
+    localStorage.clear()
+    if(!this.updateState(localStorage.getItem('token'))){
+      toast.success("Logout successful!");
+    }
   }
 
   componentDidMount() {
-
-    const username = localStorage.getItem('username');
-    const userId = localStorage.getItem('userId');
     const token = localStorage.getItem('token');
-    const isAdmin = localStorage.getItem('isAdmin')==='true';
-    if(localStorage.getItem('token')) {
-      this.setState({
-        user: {
-          isLoggedIn: true,
-          username: username,
-          userId: userId,
-          token: token,
-          isAdmin: isAdmin,
-        },
-      });      
+    if (token) {
+      this.updateState(token)
     }
   }
 
   render() {
-  
+
     return (
       <div className="App">
         <Router>
@@ -127,7 +103,7 @@ class App extends Component {
               {/* <Route exact path="/" render={() => <Home user={username}/>} /> */}
               <Route exact path="/about" component={About} />
               <Route exact path="/auth/login" render={() => <Login login={this.login} user={this.state.user} />} />
-              <Route exact path="/auth/register" render={() => <Register login={this.login} user={this.state.user}/>} />
+              <Route exact path="/auth/register" render={() => <Register login={this.login} user={this.state.user} />} />
               {/* <Route exact path="/vinyl/create" render={() => <Create user={this.state.user}/>} /> */}
               <Route component={NotFound} />
             </Switch>
