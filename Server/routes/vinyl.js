@@ -6,24 +6,26 @@ ObjectId = require('mongodb').ObjectID;
 const router = new express.Router()
 
 function validateVinylCreateForm(payload) {
-  const errors = {}
+  const errors = [];
   let isFormValid = true
   let message = ''
 
   
   if (!payload || typeof payload.title !== 'string' || payload.title.length < 3) {
     isFormValid = false
-    errors.name = 'Title must be at least 3 symbols.'
+    errors.push( 'Title must be at least 3 symbols.')
   }
-
-
   if (!payload || typeof payload.artist !== 'string' || payload.artist.length < 1 || payload.artist.length > 50) {
     isFormValid = false
-    errors.artist = 'Artist name must be at least 1 symbol and less than 50 symbols.'
+    errors.push('Artist name must be at least 1 symbol and less than 50 symbols.')
+  }
+  if (!payload || typeof payload.genre !== 'string' || payload.genre!=='Rock' || payload.genre!=='World'|| payload.genre!=='Alternative' || payload.genre!=='Other') {
+    isFormValid = false
+    errors.push('Genre must be Rock, World, Alternative or Other.')
   }
   if (!payload || typeof payload.image !== 'string' || !(payload.image.startsWith('https://') || payload.image.startsWith('http://')) || payload.image.length < 7) {
     isFormValid = false
-    errors.image = 'Please enter valid Image URL. Image URL must be at least 7 symbols.'
+    errors.push ('Please enter valid Image URL. Image URL must be at least 7 symbols.')
   }
 
   if (!isFormValid) {
@@ -60,7 +62,7 @@ router.post('/create', authCheck, (req, res) => {
       })
       .catch((err) => {
         console.log(err)
-        let message = 'Something went wrong :( Check the form for errors.'
+        let message = `Something went wrong :( ${err}`
         if (err.code === 11000) {
           message = 'Vinyl with the given title already exists.'
         }

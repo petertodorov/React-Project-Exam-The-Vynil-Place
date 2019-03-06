@@ -7,7 +7,7 @@ const Header = (props) => {
         <header>
             <NavLink exact to="/about" className="logo">The Vinyl Place</NavLink>
             <div className="header-right">
-                <NavLink exact to="/">Home</NavLink>
+                <NavLink exact to="/home">Home</NavLink>
                 <Switch>
                     {
                   props.user.isLoggedIn ?
