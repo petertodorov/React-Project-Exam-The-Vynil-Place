@@ -1,8 +1,8 @@
-.Home {
+.Details {
     text-align: center;
   }
   
-  .Home ul.movies {
+  .Vinyl {
     display: flex;
     margin: 0 auto;
     width: 50%;
@@ -10,24 +10,28 @@
     flex-wrap: wrap;
   }
   
-  .Home li.movie {
+  .Vinyl {
     display: grid;
   }
   
-  .Home .trailer {
-    margin: 0 auto;
-  }
-  
+ 
   .Home img {
     margin: 0 auto;
     width: 200px;
-    max-height: 300px;
+    max-height: 280px;
     margin-bottom:2em;
   }
   
+  h2{
+    margin:0.1em auto;
+
+  }
+  h4{
+      margin:0.3em auto;
+  }
   .Link{  
     width: 60%;
-    margin:0 auto;
+    margin:15px auto;
     border: none;
     text-align: center;  
     font-size: 16px;
@@ -35,7 +39,6 @@
     background: lightgrey;
     color: white;
     border-radius: 7px;
-    margin-top: 100px; 
     box-shadow: none; 
     padding: 10px 20px;
   }

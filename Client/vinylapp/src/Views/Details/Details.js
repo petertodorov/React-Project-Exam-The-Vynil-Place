@@ -1,0 +1,57 @@
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+
+import './Details.css'
+import VinylService from '../../services/vinylService'
+class Details extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            vinyl: {
+                title: '',
+                genre: '',
+                artist: '',
+                year: 0,
+                image: '',
+                likes: 0,
+                dislikes: 0
+            },
+        }
+    }
+    vinylService = new VinylService();
+    componentDidMount() {
+        let currentId = this.props.match.params.id;
+        let vinyl ={}
+        this.vinylService.getAllVinyls().then((data) => {
+         vinyl = data.filter(vinyl=>{return vinyl._id===currentId}).pop()
+        this.setState({ vinyl})
+        }).catch(err => { console.log(err) });
+    }    
+    render() {
+        const { title, artist, genre, year, image, likes, dislikes } = this.state.vinyl;
+        console.log(title);
+        return (
+            <div>
+                <div className="Details">
+                    <h2>Artist: {artist}</h2>
+                </div>
+                <div className="Vinyl">
+                    <img src={image} alt="cover" />
+                    <h4>Title: {title}</h4>
+                    <h4>Genre: {genre}</h4>
+                    <h4>Year of release: {year}</h4>
+                    <h4>Total Likes: {likes}</h4>
+                    <h4>Total dislikes: {dislikes}</h4>
+                    <NavLink exact to ="/home" className="Link">Home</NavLink>
+                </div>
+            </div>
+        )
+    }
+}
+
+
+
+
+
+
+export default Details;

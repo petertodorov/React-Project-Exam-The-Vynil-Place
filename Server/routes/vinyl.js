@@ -6,11 +6,11 @@ ObjectId = require('mongodb').ObjectID;
 const router = new express.Router()
 
 function validateVinylCreateForm(payload) {
+  console.log(`this is payload:=>${payload}`);
   const errors = [];
   let isFormValid = true
-  let message = ''
-
-  
+  let message = ''  
+ 
   if (!payload || typeof payload.title !== 'string' || payload.title.length < 3) {
     isFormValid = false
     errors.push( 'Title must be at least 3 symbols.')
@@ -19,10 +19,26 @@ function validateVinylCreateForm(payload) {
     isFormValid = false
     errors.push('Artist name must be at least 1 symbol and less than 50 symbols.')
   }
-  if (!payload || typeof payload.genre !== 'string' || payload.genre!=='Rock' || payload.genre!=='World'|| payload.genre!=='Alternative' || payload.genre!=='Other') {
+  if (!payload || typeof payload.genre !== 'string' || !['Rock','World','Alternative','Other'].includes(payload.genre)) {
     isFormValid = false
     errors.push('Genre must be Rock, World, Alternative or Other.')
   }
+
+  if (!payload || typeof payload.year !=='number' || payload.year===0) {
+    isFormValid = false
+    errors.push('Enter a valid year. ')
+  }
+  
+  if (typeof payload.year ==='number') {
+    if((payload.year<=1000 &&payload.year!==0)){
+      isFormValid = false
+      errors.push('Wow, that is an old vinyl. Pleace check the year')
+    }else if(payload.year>new Date().getFullYear()){
+      isFormValid = false
+      errors.push('Way ahead of our time, are we? Pleace check the year')
+    }
+  }
+  
   if (!payload || typeof payload.image !== 'string' || !(payload.image.startsWith('https://') || payload.image.startsWith('http://')) || payload.image.length < 7) {
     isFormValid = false
     errors.push ('Please enter valid Image URL. Image URL must be at least 7 symbols.')
@@ -40,6 +56,7 @@ function validateVinylCreateForm(payload) {
 }
 
 router.post('/create', authCheck, (req, res) => {
+  
   const vinylObj = req.body
   if (req.user.roles.indexOf('Admin') > -1) {
     const validationResult = validateVinylCreateForm(vinylObj)

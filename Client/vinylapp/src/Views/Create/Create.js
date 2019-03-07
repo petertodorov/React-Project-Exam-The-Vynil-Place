@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import AuthService from '../../services/authService'
+import VinylService from '../../services/vinylService'
 import './Create.css'
 class Create extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Create extends Component {
                 title: '',
                 genre: '',
                 artist: '',
-                year: '',
+                year: 0,
                 image: '',
                 likes: 0,
                 dislikes: 0
@@ -24,33 +24,24 @@ class Create extends Component {
 
     onChangeHandler(event) {
         const name = event.target.name;
-
         if (this.state.vinyl.hasOwnProperty(name)) {
             const value = event.target.value;
-
             let vinyl = { ...this.state.vinyl };
-            vinyl[name] = value;
-
+            if (name === 'year') {
+                vinyl[name] = Number(value);
+            }
+            else {
+                vinyl[name] = value;
+            }
             this.setState({ vinyl });
         }
     }
 
+    vinylService = new VinylService();
     onSubmitHandler(event) {
         event.preventDefault();
-
-        // if (!this.isVinylValid(this.state.vinyl)) {
-        //     return;
-        // }
-
-        fetch('http://localhost:5000/vinyl/create', {
-            method: 'POST',
-            body: JSON.stringify(this.state.vinyl),
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-        })
-            .then((response) => response.json())
+        console.log(this.state.vinyl);
+        this.vinylService.createVinyl(this.state.vinyl)
             .then((data) => {
                 if (data.success) {
                     toast.success(data.message);
@@ -71,27 +62,6 @@ class Create extends Component {
             });
     }
 
-    // isVinylValid(vinyl) {
-    //     let isValid = true;
-
-    //     if (!vinyl.title || !vinyl.title.trim()) {
-    //         toast.error("Title is required!");
-    //         isValid = false;
-    //     }
-    //     if (!vinyl.genre || !vinyl.genre.trim()) {
-    //         toast.error("Genre is required!");
-    //         isValid = false;
-    //     }
-    //     if (!vinyl.image || !vinyl.image.trim()) {
-    //         toast.error("Image Url is required!");
-    //         isValid = false;
-    //     }
-    //     if (!vinyl.artist || !vinyl.artist.trim()) {
-    //         toast.error("Artist  is required!");
-    //         isValid = false;
-    //     }
-    //     return isValid;
-    // }
 
 
     render() {

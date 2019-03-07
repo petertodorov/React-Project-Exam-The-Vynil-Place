@@ -7,7 +7,6 @@ import AuthService from '../../services/authService'
 class Register extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       username: '',
       email: '',

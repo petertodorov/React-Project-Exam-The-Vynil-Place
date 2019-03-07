@@ -2,28 +2,35 @@ function request(method) {
     const getAuthHeader = ()=>{
      const token =localStorage.getItem('token'); 
         if( token &&  token.length){
-            return {'Authorization' :`Bearer ${token}`}
+            console.log(`token is=> ${token}`);
+            return `Bearer ${token}`
         }else{
-            console.log('no tokennnnnnnnnnnnn ');
+            console.log('no token found ');
             return {}
         }
     }
 
     return async (url, data = {}, options = {}) => {
-        const authHeader = getAuthHeader();
-        const response = await fetch(url, {
-            method,
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                ...authHeader
-            },
-            body: Object.keys(data).length ? JSON.stringify(data) : undefined,
-            ...options
-        });
-        return response.json();
+        try{
+            const authHeader = getAuthHeader();
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Authorization" : authHeader
+                },
+                body: Object.keys(data).length ? JSON.stringify(data) : undefined,
+                ...options
+            });
+            return response.json();
+
+        }catch(err){
+            alert(err)}
+        }
+       
     };
-};
+
 export const get = request('get');
 export const post = request('post');
 export const put = request('put');

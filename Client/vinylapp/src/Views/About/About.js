@@ -3,7 +3,7 @@ import './About.css'
 const About = ()=>(
 <div className="About">
     <h1>The Vinyl Place</h1>
-    <p>A place to share what music you like and which vinyls you consider as good or not that good</p>
+    <p>A place to check my vinyl collection and share what You like and what you don't</p>
 </div>
 )
 export default About
