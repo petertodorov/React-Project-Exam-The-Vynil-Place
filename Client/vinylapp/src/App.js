@@ -8,7 +8,7 @@ import Register from './Views/Register/Register'
 import Home from './Views/Home/Home'
 import Details from './Views/Details/Details'
 import Create from './Views/Create/Create'
-
+import Edit from './Views/Edit/Edit'
 import NotFound from './Views/NotFound/NotFound';
 import AuthService from './services/authService'
 
@@ -115,6 +115,7 @@ class App extends Component {
               <Route exact path="/auth/register" render={() => <Register login={this.login} user={this.state.user} />} />
               <Route exact path="/vinyl/create" render={() => <Create user={this.state.user} />} />
               <Route exact path="/vinyl/details/:id" render={(props) => <Details {...props}/>} />
+              <Route exact path="/vinyl/edit/:id" render={(props) => <Edit {...props} user={this.state.user}/>} />
    
               <Route component={NotFound} />
             </Switch>

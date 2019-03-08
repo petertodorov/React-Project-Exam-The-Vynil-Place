@@ -17,7 +17,6 @@ const Header = (props) => {
                                     (
                                         <Fragment>
                                             <NavLink exact to="/vinyl/create">Create</NavLink>
-                                            <NavLink exact to="/vinyl/edit/:id">Edit</NavLink>
                                         </Fragment>
                                     )
                                     :

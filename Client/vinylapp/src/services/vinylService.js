@@ -3,14 +3,15 @@ import { get, post, put, remove } from '../data/crud'
 class VinylService {
     constructor() {
         this.baseUrl = 'http://localhost:5000/vinyl';
-  this.allVinylsUrl =   `${this.baseUrl}/all`
-        this.createUrl = `${this.baseUrl}/create`
+        this.allVinylsUrl = `${this.baseUrl}/all`;
+        this.createUrl = `${this.baseUrl}/create`;
+        this.editUrl = `${this.baseUrl}/edit`;
     }
-    getAllVinyls(){
+    getAllVinyls() {
         return get(this.allVinylsUrl);
     }
-    createVinyl(data){
-        return post(this.createUrl,data)
+    createVinyl(data) {
+        return post(this.createUrl, data)
     }
     
 }

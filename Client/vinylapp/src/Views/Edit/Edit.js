@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component} from 'react';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import VinylService from '../../services/vinylService'
-import './Create.css'
+import './Edit.css'
 class Create extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +16,7 @@ class Create extends Component {
                 likes: 0,
                 dislikes: 0
             },
-            redirect: false
+            redirect: false,
         };
         this.onChangeHandler = this.onChangeHandler.bind(this)
         this.onSubmitHandler = this.onSubmitHandler.bind(this)
@@ -37,71 +37,71 @@ class Create extends Component {
         }
     }
 
+    componentDidMount() {
+        let currentId = this.props.match.params.id;
+        let vinyl ={}
+        this.vinylService.getAllVinyls().then((data) => {
+         vinyl = data.filter(vinyl=>{return vinyl._id===currentId}).pop()
+        this.setState({ vinyl})
+        }).catch(err => { console.log(err) });
+    } 
+
     vinylService = new VinylService();
-    onSubmitHandler(event) {
+    async onSubmitHandler(event) {
         event.preventDefault();
-        console.log(this.state.vinyl);
-        this.vinylService.createVinyl(this.state.vinyl)
-            .then((data) => {
-                if (data.success) {
-                    toast.success(data.message);
-                    this.setState({
-                        redirect: true,
-                    });
-                }
-                else {
-                    if (data.errors) {
-                        data.errors.forEach((err) => {
-                            toast.error(err);
-                        });
-                    }
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        try{
+            console.log(this.state.vinyl);
+        let currentId = this.props.match.params.id;
+        let foundVinyl  = await this.vinylService.getAllVinyls();
+        let vinylToEdit = foundVinyl.filter(vinyl=>{return vinyl._id===currentId}).pop()
+            //TODO update the vinylToFind
+        }catch(err){
+            console.log(err);
+        }
     }
 
 
 
     render() {
         const { user } = this.props;
+        const { title,genre,artist,year,image } = this.state.vinyl;
+        console.log(this.state);
+
         if (!user.isAdmin || this.state.redirect) {
             return <Redirect to="/home" />;
         }
 
         return (
             <div className="Create">
-                <h1>Create Vinyl</h1>
+                <h1>Edit  Vinyl</h1>
                 <form onSubmit={this.onSubmitHandler} >
                     <label htmlFor="title">Title</label>
-                    <input type="text" id="title" name="title" placeholder="Enter title"
+                    <input type="text" id="title" name="title"
                         onChange={this.onChangeHandler}
+                        value={title} />
 
-                        value={this.state.title} />
-
-                    <label htmlFor="artist">Artist</label>
-                    <input type="text" id="artist" name="artist" placeholder="Enter artist"
+                    <label htmlFor="trailerUrl">Artist</label>
+                    <input type="text" id="artist" name="artist" 
                         onChange={this.onChangeHandler}
-                        value={this.state.artist} />
+                        value={artist} />
 
                     <label htmlFor="genre">Genre</label>
-                    <input type="text" id="genre" name="genre" placeholder="Rock, World, Alternative, Other"
+                    <input type="text" id="genre" name="genre" 
                         onChange={this.onChangeHandler}
-                        value={this.state.genre} />
+                        value={genre} />
 
-                    <label htmlFor="year">Year</label>
+                    <label htmlFor="storyLine">Year</label>
                     <input type="number" id="year" name="year" placeholder="Enter year"
                         onChange={this.onChangeHandler}
-                        value={this.state.year} />
+                        value={year} />
 
 
                     <label htmlFor="image">Image Url</label>
-                    <input type="text" id="image" name="image" placeholder="Enter image url"
+                    <input type="text" id="image" name="image"
                         onChange={this.onChangeHandler}
-                        value={this.state.image} />
+                        value={image} />
 
-                    <input type="submit" value="Create" />
+                    <input type="submit" value="Edit" />
                 </form>
             </div>
         );

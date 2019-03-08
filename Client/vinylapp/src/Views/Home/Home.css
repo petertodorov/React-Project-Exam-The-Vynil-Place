@@ -19,10 +19,10 @@
   }
   
   .Home img {
-    margin: 0 auto;
+    margin: 1em auto;
     width: 200px;
     max-height: 300px;
-    margin-bottom:2em;
+    margin-bottom:1em;
   }
   
   .Link{  
@@ -43,4 +43,19 @@
   .Link:hover{
     color: white;
     background: darkgray;
+  }
+
+  .Edit{
+    display:grid;
+    width: 30%;
+    margin:2em auto;
+    border: none;
+    text-align: center;  
+    font-size: 16px;
+    text-decoration: none;
+    background: lightgrey;
+    color: white;
+    border-radius: 7px;
+    box-shadow: none; 
+    padding: 10px 20px;
   }

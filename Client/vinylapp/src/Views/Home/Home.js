@@ -1,6 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Redirect,NavLink } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import './Home.css'
 
 import VinylService from '../../services/vinylService'
@@ -20,7 +19,6 @@ class Home extends Component {
             this.setState({
                 vinyls: data
             });
-            console.log(this.state.vinyls);
         })
             .catch(err => {
                 console.log(err);
@@ -38,18 +36,27 @@ class Home extends Component {
                 <ul className="movies">
                     {
                         this.state.vinyls.map((vinyl) => (
-
                             <li className="movie" key={vinyl._id}>
                                 <h2>{vinyl.title}</h2>
-                                <NavLink to={`/vinyl/details/${vinyl._id}`}><img src={vinyl.image} alt="cover"/></NavLink>
+                                <NavLink to={`/vinyl/details/${vinyl._id}`}><img src={vinyl.image} alt="cover" /></NavLink>
                                 {
                                     this.props.user.isLoggedIn
                                         ?
                                         (<span>
-                                            <NavLink to={`/vinyl/details/${vinyl._id}`}  className="Link">Show Details</NavLink>
+                                            <NavLink to={`/vinyl/details/${vinyl._id}`} className="Link">Show Details</NavLink>
                                         </span>)
                                         :
-                                        null
+                                        (null)
+
+                                }
+                                {
+                                    this.props.user.isAdmin
+                                        ?
+                                        (<span>
+                                            <NavLink to={`/vinyl/edit/${vinyl._id}`} className="Edit">Edit</NavLink>
+                                        </span>)
+                                        :
+                                        (null)
                                 }
                             </li>
                         ))
