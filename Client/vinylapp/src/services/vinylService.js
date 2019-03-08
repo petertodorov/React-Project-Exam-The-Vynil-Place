@@ -13,6 +13,9 @@ class VinylService {
     createVinyl(data) {
         return post(this.createUrl, data)
     }
+    editVinyl(data){
+        return post(this.editUrl+"/"+`${{...data}._id}`,data)
+    }
     
 }
 export default VinylService;

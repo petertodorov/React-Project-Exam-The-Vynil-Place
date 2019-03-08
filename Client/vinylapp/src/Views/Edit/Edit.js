@@ -50,10 +50,34 @@ class Create extends Component {
     async onSubmitHandler(event) {
         event.preventDefault();
         try{
-            console.log(this.state.vinyl);
-        let currentId = this.props.match.params.id;
-        let foundVinyl  = await this.vinylService.getAllVinyls();
-        let vinylToEdit = foundVinyl.filter(vinyl=>{return vinyl._id===currentId}).pop()
+            console.log(`Current state => ${this.state.vinyl}`);
+
+            this.vinylService.editVinyl(this.state.vinyl)
+            .then((data) => {
+                console.log(data);
+                if (data.success) {
+                    toast.success(data.message);
+                    this.setState({
+                        redirect: true,
+                    });
+                }
+                else {
+                    if (data.errors) {
+                        data.errors.forEach((err) => {
+                            toast.error(err);
+                        });
+                    }
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+
+
+
+        // let currentId = this.props.match.params.id;
+        // let foundVinyl  = await this.vinylService.getAllVinyls();
+        // let vinylToEdit = foundVinyl.filter(vinyl=>{return vinyl._id===currentId}).pop()
             //TODO update the vinylToFind
         }catch(err){
             console.log(err);
@@ -65,8 +89,6 @@ class Create extends Component {
     render() {
         const { user } = this.props;
         const { title,genre,artist,year,image } = this.state.vinyl;
-        console.log(this.state);
-
         if (!user.isAdmin || this.state.redirect) {
             return <Redirect to="/home" />;
         }
