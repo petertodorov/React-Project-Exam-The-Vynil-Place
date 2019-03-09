@@ -1,0 +1,49 @@
+.Details {
+    text-align: center;
+  }
+  
+  .Vinyl {
+    display: flex;
+    margin: 0 auto;
+    width: 50%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  .Vinyl {
+    display: grid;
+  }
+  
+ 
+  .Home img {
+    margin: 0 auto;
+    max-width: 200px;
+    max-height: 180px;
+    margin-bottom:2em;
+  }
+  
+  h2{
+    margin:0.1em auto;
+
+  }
+  h4{
+      margin:0.3em auto;
+  }
+  .Link{  
+    width: 60%;
+    margin:15px auto;
+    border: none;
+    text-align: center;  
+    font-size: 16px;
+    text-decoration: none;
+    background: lightgrey;
+    color: white;
+    border-radius: 7px;
+    box-shadow: none; 
+    padding: 10px 20px;
+  }
+  
+  .Link:hover{
+    color: white;
+    background: darkgray;
+  }

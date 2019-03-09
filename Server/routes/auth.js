@@ -5,27 +5,23 @@ const validator = require('validator')
 const router = new express.Router()
 
 function validateSignupForm (payload) {
-  const errors = {}
+  const errors = []
   let isFormValid = true
   let message = ''
 
   if (!payload || typeof payload.username !== 'string' || payload.username.trim().length < 3) {
     isFormValid = false
-    errors.username = 'Username must be at least 3 characters long'
+    errors.push ('Username must be at least 3 characters long')
   }
 
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
     isFormValid = false
-    errors.email = 'Please provide a correct email address'
+    errors.push('Please provide a correct email address')
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length < 3) {
     isFormValid = false
-    errors.password = 'Password must be at least 3 characters long'
-  }
-
-  if (!isFormValid) {
-    message = 'Check the form for errors.'
+    errors.push( 'Password must be at least 3 characters long')
   }
 
   return {
@@ -36,22 +32,18 @@ function validateSignupForm (payload) {
 }
 
 function validateLoginForm (payload) {
-  const errors = {}
+  const errors = []
   let isFormValid = true
   let message = ''
 
   if (!payload || typeof payload.username !== 'string' || payload.username.trim().length < 3) {
     isFormValid = false
-    errors.username = 'Please enter a valid username.'
+    errors.push( 'Please enter a valid username.')
   }
 
   if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
     isFormValid = false
-    errors.password = 'Please enter a valid password.'
-  }
-
-  if (!isFormValid) {
-    message = 'Please fill in the form again.'
+    errors.push( 'Please enter a valid password.')
   }
 
   return {
@@ -73,20 +65,21 @@ router.post('/signup', (req, res, next) => {
 
   return passport.authenticate('local-signup', (err) => {
     if (err) {
+      console.log(err);
       return res.status(200).json({
         success: false,
-        message: err
+        message: err,
       })
     }
 
     return res.status(200).json({
       success: true,
-      message: 'You have successfully signed up! Now you should be able to log in.'
+      message: 'You have signed up sucessfully',
     })
   })(req, res, next)
 })
 
-router.post('/login', (req, res, next) => {
+router.post('/signin', (req, res, next) => {
   const validationResult = validateLoginForm(req.body)
   if (!validationResult.success) {
     return res.status(200).json({
@@ -98,6 +91,7 @@ router.post('/login', (req, res, next) => {
 
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
+      console.log(err);
       if (err.name === 'IncorrectCredentialsError') {
         return res.status(200).json({
           success: false,
@@ -115,8 +109,9 @@ router.post('/login', (req, res, next) => {
       success: true,
       message: 'You have successfully logged in!',
       token,
-      user: userData
+      userData
     })
+
   })(req, res, next)
 })
 

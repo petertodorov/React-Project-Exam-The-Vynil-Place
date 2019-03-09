@@ -8,7 +8,6 @@ module.exports = new PassportLocalStrategy({
   session: false,
   passReqToCallback: true
 }, (req, email, password, done) => {
-  console.log(email)
   const user = {
     email: email.trim(),
     password: password.trim(),
@@ -16,7 +15,7 @@ module.exports = new PassportLocalStrategy({
   }
 
   User
-    .find({email: email})
+    .find({ email: email })
     .then(users => {
       if (users.length > 0) {
         return done('E-mail already exists!')
@@ -31,8 +30,8 @@ module.exports = new PassportLocalStrategy({
         .then(() => {
           return done(null)
         })
-        .catch(() => {
-          return done('Something went wrong :( Check the form for errors.')
+        .catch((err) => {
+          return done(`Something went wrong :( Please fill the form again`)
         })
     })
 })

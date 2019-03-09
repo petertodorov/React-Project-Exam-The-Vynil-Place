@@ -6,24 +6,42 @@ ObjectId = require('mongodb').ObjectID;
 const router = new express.Router()
 
 function validateVinylCreateForm(payload) {
-  const errors = {}
+  console.log(`this is payload:=>${payload}`);
+  const errors = [];
   let isFormValid = true
   let message = ''
 
-  
   if (!payload || typeof payload.title !== 'string' || payload.title.length < 3) {
     isFormValid = false
-    errors.name = 'Title must be at least 3 symbols.'
+    errors.push('Title must be at least 3 symbols.')
   }
-
-
   if (!payload || typeof payload.artist !== 'string' || payload.artist.length < 1 || payload.artist.length > 50) {
     isFormValid = false
-    errors.artist = 'Artist name must be at least 1 symbol and less than 50 symbols.'
+    errors.push('Artist name must be at least 1 symbol and less than 50 symbols.')
   }
+  if (!payload || typeof payload.genre !== 'string' || !['Rock', 'World', 'Alternative', 'Other'].includes(payload.genre)) {
+    isFormValid = false
+    errors.push('Genre must be Rock, World, Alternative or Other.')
+  }
+
+  if (!payload || typeof payload.year !== 'number' || payload.year === 0) {
+    isFormValid = false
+    errors.push('Enter a valid year. ')
+  }
+
+  if (typeof payload.year === 'number') {
+    if ((payload.year <= 1000 && payload.year !== 0)) {
+      isFormValid = false
+      errors.push('Wow, that is an old vinyl. Pleace check the year')
+    } else if (payload.year > new Date().getFullYear()) {
+      isFormValid = false
+      errors.push('Way ahead of our time, are we? Pleace check the year')
+    }
+  }
+
   if (!payload || typeof payload.image !== 'string' || !(payload.image.startsWith('https://') || payload.image.startsWith('http://')) || payload.image.length < 7) {
     isFormValid = false
-    errors.image = 'Please enter valid Image URL. Image URL must be at least 7 symbols.'
+    errors.push('Please enter valid Image URL. Image URL must be at least 7 symbols.')
   }
 
   if (!isFormValid) {
@@ -38,6 +56,7 @@ function validateVinylCreateForm(payload) {
 }
 
 router.post('/create', authCheck, (req, res) => {
+
   const vinylObj = req.body
   if (req.user.roles.indexOf('Admin') > -1) {
     const validationResult = validateVinylCreateForm(vinylObj)
@@ -60,7 +79,7 @@ router.post('/create', authCheck, (req, res) => {
       })
       .catch((err) => {
         console.log(err)
-        let message = 'Something went wrong :( Check the form for errors.'
+        let message = `Something went wrong :( ${err}`
         if (err.code === 11000) {
           message = 'Vinyl with the given title already exists.'
         }
@@ -97,8 +116,8 @@ router.post('/edit/:id', authCheck, (req, res) => {
         existingVinyl.artist = vinylObj.artist
         existingVinyl.genre = vinylObj.genre
         existingVinyl.year = vinylObj.year
-        existingVinyl.likes 
-        existingVinyl.dislikes 
+        existingVinyl.likes
+        existingVinyl.dislikes
         existingVinyl.image = vinylObj.image
 
         existingVinyl
@@ -141,7 +160,7 @@ router.post('/edit/:id', authCheck, (req, res) => {
 router.get('/all', (req, res) => {
   Vinyl
     .find()
-    .then(vinyls => {      
+    .then(vinyls => {
       res.status(200).json(vinyls)
     })
 })
@@ -157,23 +176,19 @@ router.post('/likes/:id', authCheck, (req, res) => {
           success: false,
           message: 'Vinyl not found.'
         })
-      }
-
-      vinyl.likes += 1;
-      User.findById(userId).then((user)=>{
-      
-        if(user.likedVinyls.indexOf(id)<0){
-          user.likedVinyls.push(id);
-         }
-        
-          if(user.dislikedVinyls.indexOf(id)!==-1){
-            const index = user.dislikedVinyls.indexOf(id)
-             user.dislikedVinyls.splice(index, 1)  
+      }else{
+        vinyl.likes += 1;
+        User.findById(userId).then((user) => {
+          if (user.likedVinyls.indexOf(id) < 0) {
+            user.likedVinyls.push(id);
           }
-        user.save()
-      }).catch((error)=>console.log(error));
-
-      vinyl
+          if (user.dislikedVinyls.indexOf(id) !== -1) {
+            const index = user.dislikedVinyls.indexOf(id)
+            user.dislikedVinyls.splice(index, 1)
+          }
+          user.save()
+        }).catch((error) => console.log(error));
+        vinyl
         .save()
         .then((vinyl) => {
           res.status(200).json({
@@ -184,16 +199,16 @@ router.post('/likes/:id', authCheck, (req, res) => {
         })
         .catch((err) => {
           console.log(err)
-          const message = 'Something went wrong :( Check the form for errors.'
+          const message = `Inner Something went wrong :( ${err}`
           return res.status(200).json({
             success: false,
             message: message
           })
         })
-    })
-    .catch((err) => {
+      }
+    }).catch((err) => {
       console.log(err)
-      const message = 'Something went wrong :( Check the form for errors.'
+      const message = `Outer Something went wrong :( ${err}`
       return res.status(200).json({
         success: false,
         message: message
@@ -216,17 +231,17 @@ router.post('/dislikes/:id', authCheck, (req, res) => {
       }
 
       vinyl.dislikes += 1;
-      User.findById(userId).then((user)=>{
-       if(user.dislikedVinyls.indexOf(id)<0){
-        user.dislikedVinyls.push(id);
-       }
-      
-        if(user.likedVinyls.indexOf(id)!==-1){
+      User.findById(userId).then((user) => {
+        if (user.dislikedVinyls.indexOf(id) < 0) {
+          user.dislikedVinyls.push(id);
+        }
+
+        if (user.likedVinyls.indexOf(id) !== -1) {
           const index = user.likedVinyls.indexOf(id)
-           user.likedVinyls.splice(index, 1)  
+          user.likedVinyls.splice(index, 1)
         }
         user.save();
-      }).then((error)=>console.log(error))
+      }).then((error) => console.log(error))
 
       vinyl
         .save()
