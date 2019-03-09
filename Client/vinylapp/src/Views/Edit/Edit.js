@@ -1,9 +1,9 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import VinylService from '../../services/vinylService'
 import './Edit.css'
-class Create extends Component {
+class Edit extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -39,20 +39,17 @@ class Create extends Component {
 
     componentDidMount() {
         let currentId = this.props.match.params.id;
-        let vinyl ={}
+        let vinyl = {}
         this.vinylService.getAllVinyls().then((data) => {
-         vinyl = data.filter(vinyl=>{return vinyl._id===currentId}).pop()
-        this.setState({ vinyl})
+            vinyl = data.filter(vinyl => { return vinyl._id === currentId }).pop()
+            this.setState({ vinyl })
         }).catch(err => { console.log(err) });
-    } 
+    }
 
     vinylService = new VinylService();
     async onSubmitHandler(event) {
         event.preventDefault();
-        try{
-            console.log(`Current state => ${this.state.vinyl}`);
-
-            this.vinylService.editVinyl(this.state.vinyl)
+        this.vinylService.editVinyl(this.state.vinyl)
             .then((data) => {
                 console.log(data);
                 if (data.success) {
@@ -60,35 +57,21 @@ class Create extends Component {
                     this.setState({
                         redirect: true,
                     });
-                }
-                else {
+                } else {
                     if (data.errors) {
                         data.errors.forEach((err) => {
                             toast.error(err);
                         });
                     }
                 }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-
-
-
-        // let currentId = this.props.match.params.id;
-        // let foundVinyl  = await this.vinylService.getAllVinyls();
-        // let vinylToEdit = foundVinyl.filter(vinyl=>{return vinyl._id===currentId}).pop()
-            //TODO update the vinylToFind
-        }catch(err){
-            console.log(err);
-        }
+            }).catch(err => console.log(err));
     }
 
 
 
     render() {
         const { user } = this.props;
-        const { title,genre,artist,year,image } = this.state.vinyl;
+        const { title, genre, artist, year, image } = this.state.vinyl;
         if (!user.isAdmin || this.state.redirect) {
             return <Redirect to="/home" />;
         }
@@ -103,12 +86,12 @@ class Create extends Component {
                         value={title} />
 
                     <label htmlFor="trailerUrl">Artist</label>
-                    <input type="text" id="artist" name="artist" 
+                    <input type="text" id="artist" name="artist"
                         onChange={this.onChangeHandler}
                         value={artist} />
 
                     <label htmlFor="genre">Genre</label>
-                    <input type="text" id="genre" name="genre" 
+                    <input type="text" id="genre" name="genre"
                         onChange={this.onChangeHandler}
                         value={genre} />
 
@@ -129,4 +112,4 @@ class Create extends Component {
         );
     }
 }
-export default Create;
+export default Edit;

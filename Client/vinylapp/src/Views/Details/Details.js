@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink,Redirect } from 'react-router-dom';
 
 import './Details.css'
 import VinylService from '../../services/vinylService'
@@ -30,6 +30,11 @@ class Details extends Component {
     render() {
         const { title, artist, genre, year, image, likes, dislikes } = this.state.vinyl;
         console.log(title);
+        if (!this.props.user.isLoggedIn) {
+            return <Redirect to="/home" />;
+        }
+
+        
         return (
             <div>
                 <div className="Details">

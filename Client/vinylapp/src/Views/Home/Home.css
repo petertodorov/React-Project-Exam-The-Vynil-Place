@@ -12,7 +12,10 @@
   
   .Home li.movie {
     display: grid;
+  width:270px;
+  
   }
+
   
   .Home .trailer {
     margin: 0 auto;
@@ -46,9 +49,9 @@
   }
 
   .Edit{
-    display:grid;
-    width: 30%;
-    margin:2em auto;
+    display:inline-block;
+    width: 16%;
+    margin:2em 0.2em;
     border: none;
     text-align: center;  
     font-size: 16px;
