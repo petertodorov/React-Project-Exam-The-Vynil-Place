@@ -176,35 +176,48 @@ router.post('/likes/:id', authCheck, (req, res) => {
           success: false,
           message: 'Vinyl not found.'
         })
-      }else{
-        vinyl.likes += 1;
+      } else {
         User.findById(userId).then((user) => {
-          if (user.likedVinyls.indexOf(id) < 0) {
-            user.likedVinyls.push(id);
-          }
-          if (user.dislikedVinyls.indexOf(id) !== -1) {
-            const index = user.dislikedVinyls.indexOf(id)
-            user.dislikedVinyls.splice(index, 1)
-          }
+          if (user.likedVinyls.indexOf(id) < 0 && user.dislikedVinyls.indexOf(id) < 0) {
+            user.likedVinyls.push(ObjectId(id));
+            vinyl.likes += 1;
+            vinyl.save()
+              .then((vinyl) => {
+                res.status(200).json({
+                  success: true,
+                  message: 'New like added.',
+                  data: vinyl
+                })
+              }).catch((err) => {
+                console.log(err)
+                const message = `Inner Something went wrong :( ${err}`
+                return res.status(200).json({
+                  success: false,
+                  message: message
+                })
+              })
+
+          } else{
+            if (user.likedVinyls.indexOf(id) >= 0) {
+              return res.status(200).json({
+                success: false,
+                message: 'You cannnot like twice the same vinyl.'
+              })
+            }
+            if (user.dislikedVinyls.indexOf(id) >= 0) {
+              return res.status(200).json({
+                success: false,
+                message: 'You have already disliked the vinyl.'
+              })
+            }
+          } 
+
+          // if (user.dislikedVinyls.indexOf(id) !== -1) {
+          //   const index = user.dislikedVinyls.indexOf(id)
+          //   user.dislikedVinyls.splice(index, 1)
+          // }
           user.save()
         }).catch((error) => console.log(error));
-        vinyl
-        .save()
-        .then((vinyl) => {
-          res.status(200).json({
-            success: true,
-            message: 'New like added.',
-            data: vinyl
-          })
-        })
-        .catch((err) => {
-          console.log(err)
-          const message = `Inner Something went wrong :( ${err}`
-          return res.status(200).json({
-            success: false,
-            message: message
-          })
-        })
       }
     }).catch((err) => {
       console.log(err)
@@ -230,38 +243,51 @@ router.post('/dislikes/:id', authCheck, (req, res) => {
         })
       }
 
-      vinyl.dislikes += 1;
       User.findById(userId).then((user) => {
-        if (user.dislikedVinyls.indexOf(id) < 0) {
-          user.dislikedVinyls.push(id);
-        }
+        if (user.dislikedVinyls.indexOf(id) < 0 && user.likedVinyls.indexOf(id) < 0) {
+          user.dislikedVinyls.push(ObjectId(id));
+          vinyl.dislikes += 1;
+          vinyl
+            .save()
+            .then((vinyl) => {
+              res.status(200).json({
+                success: true,
+                message: 'New dislike added.',
+                data: vinyl
+              })
+            })
+            .catch((err) => {
+              console.log(err)
+              const message = 'Something went wrong :( Check the form for errors.'
+              return res.status(200).json({
+                success: false,
+                message: message
+              })
+            })
+        } else {
+          if (user.dislikedVinyls.indexOf(id) >= 0) {
+            return res.status(200).json({
+              success: false,
+              message: 'You cannnot dislike twice the same vinyl.'
+            })
+          }
 
-        if (user.likedVinyls.indexOf(id) !== -1) {
-          const index = user.likedVinyls.indexOf(id)
-          user.likedVinyls.splice(index, 1)
+          if (user.likedVinyls.indexOf(id) >= 0) {
+            return res.status(200).json({
+              success: false,
+              message: 'You have alreay liked the vinyl.'
+            })
+          }
         }
+        
+
+        // if (user.likedVinyls.indexOf(id) !== -1) {
+        //   const index = user.likedVinyls.indexOf(id)
+        //   user.likedVinyls.splice(index, 1)
+        // }
         user.save();
       }).then((error) => console.log(error))
-
-      vinyl
-        .save()
-        .then((vinyl) => {
-          res.status(200).json({
-            success: true,
-            message: 'New dislike added.',
-            data: vinyl
-          })
-        })
-        .catch((err) => {
-          console.log(err)
-          const message = 'Something went wrong :( Check the form for errors.'
-          return res.status(200).json({
-            success: false,
-            message: message
-          })
-        })
-    })
-    .catch((err) => {
+    }).catch((err) => {
       console.log(err)
       const message = 'Something went wrong :( Check the form for errors.'
       return res.status(200).json({

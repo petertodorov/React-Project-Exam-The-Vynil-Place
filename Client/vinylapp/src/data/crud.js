@@ -5,7 +5,7 @@ function request(method) {
             console.log(`token is=> ${token}`);
             return `Bearer ${token}`
         }else{
-            console.log('no token found ');
+            console.log('no token found');
             return {}
         }
     }

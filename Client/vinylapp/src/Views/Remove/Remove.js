@@ -50,7 +50,7 @@ class Remove extends Component {
 
     render() {
         const { user } = this.props;
-        const { title, genre, artist, year, image } = this.state.vinyl;
+        const {  artist, image } = this.state.vinyl;
         if (!user.isAdmin || this.state.redirect) {
             return <Redirect to="/home" />;
         }

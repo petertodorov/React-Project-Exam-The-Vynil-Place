@@ -20,7 +20,7 @@ class VinylService {
         return post(this.editUrl+`/${{...data}._id}`,data)
     }
     removeVinyl(data){
-        return remove(this.removeUrl+"/"+`${{...data}._id}`)
+        return remove(this.removeUrl+`/${{...data}._id}`)
     }
     likeVinyl(id){
         return post(`${this.likeUrl}/${id}`)

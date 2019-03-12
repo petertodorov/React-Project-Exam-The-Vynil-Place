@@ -2,63 +2,10 @@
     text-align: center;
   }
   
-  .Home ul.movies {
-    display: flex;
-    margin: 0 auto;
-    width: 50%;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-  }
   
-  .Home li.movie {
-    display: grid;
-  width:270px;
-  
-  }
-
-  
-  .Home .trailer {
-    margin: 0 auto;
-  }
-  
-  .Home img {
+ .HomeImage {
     margin: 1em auto;
-    width: 200px;
-    max-height: 300px;
+    width: 25em;
+    height: auto;
     margin-bottom:1em;
-  }
-  
-  .Link{  
-    width: 60%;
-    margin:0 auto;
-    border: none;
-    text-align: center;  
-    font-size: 16px;
-    text-decoration: none;
-    background: lightgrey;
-    color: white;
-    border-radius: 7px;
-    margin-top: 100px; 
-    box-shadow: none; 
-    padding: 10px 20px;
-  }
-  
-  .Link:hover{
-    color: white;
-    background: darkgray;
-  }
-
-  .Edit{
-    display:inline-block;
-    width: 16%;
-    margin:2em 0.2em;
-    border: none;
-    text-align: center;  
-    font-size: 16px;
-    text-decoration: none;
-    background: lightgrey;
-    color: white;
-    border-radius: 7px;
-    box-shadow: none; 
-    padding: 10px 20px;
   }

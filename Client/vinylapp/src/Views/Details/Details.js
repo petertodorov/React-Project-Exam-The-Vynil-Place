@@ -47,7 +47,7 @@ class Details extends Component {
                     <h4>Year of release: {year}</h4>
                     <h4>Total Likes: {likes}</h4>
                     <h4>Total dislikes: {dislikes}</h4>
-                    <NavLink exact to ="/home" className="Link">Home</NavLink>
+                    <NavLink exact to ="/vinyls" className="Link">Vinyls</NavLink>
                 </div>
             </div>
         )

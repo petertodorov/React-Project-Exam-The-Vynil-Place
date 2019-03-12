@@ -2,10 +2,13 @@ import React, { Component, Fragment } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import About from './Views/About/About'
+import Stats from './Views/Stats/Stats'
 import Header from './Components/Header/Header'
 import Login from './Views/Login/Login'
 import Register from './Views/Register/Register'
 import Home from './Views/Home/Home'
+import Vinyls from './Views/Vinyls/Vinyls'
+
 import Details from './Views/Details/Details'
 import Create from './Views/Create/Create'
 import Edit from './Views/Edit/Edit'
@@ -87,9 +90,8 @@ class App extends Component {
         isAdmin: false,
       },
     });
-    console.log(this.state);
     toast.success("Logout successful!");
-    return <Redirect to="/home" />;
+    // return <Redirect to="/home" />;
 
   }
 
@@ -111,6 +113,9 @@ class App extends Component {
             <Switch>
               <Route exact path="/" render={() => <Home user={this.state.user} />} />
               <Route exact path="/home" render={() => <Home user={this.state.user} />} />
+              <Route exact path="/vinyls" render={() => <Vinyls user={this.state.user} />} />
+              
+              <Route exact path="/stats/users" render={() => <Stats user={this.state.user} />} />
               <Route exact path="/about" component={About} />
               <Route exact path="/auth/login" render={() => <Login login={this.login} user={this.state.user} />} />
               <Route exact path="/auth/register" render={() => <Register login={this.login} user={this.state.user} />} />
@@ -118,6 +123,7 @@ class App extends Component {
               <Route exact path="/vinyl/details/:id" render={(props) => <Details {...props} user={this.state.user}/>} />
               <Route exact path="/vinyl/edit/:id" render={(props) => <Edit {...props} user={this.state.user}/>} />
               <Route exact path="/vinyl/delete/:id" render={(props) => <Remove {...props} user={this.state.user}/>} />
+   
    
               <Route component={NotFound} />
             </Switch>

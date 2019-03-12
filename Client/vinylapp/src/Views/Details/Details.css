@@ -15,7 +15,7 @@
   }
   
  
-  .Home img {
+  .Details img {
     margin: 0 auto;
     max-width: 200px;
     max-height: 180px;
@@ -29,9 +29,9 @@
   h4{
       margin:0.3em auto;
   }
-  .Link{  
-    width: 60%;
-    margin:15px auto;
+  .Details .Link {
+    width: 70%;
+    margin:0 auto;
     border: none;
     text-align: center;  
     font-size: 16px;
@@ -39,6 +39,7 @@
     background: lightgrey;
     color: white;
     border-radius: 7px;
+    margin-bottom: 0.5em; 
     box-shadow: none; 
     padding: 10px 20px;
   }
