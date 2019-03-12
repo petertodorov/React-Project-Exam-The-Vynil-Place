@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const encryption = require('../utilities/encryption')
+const Vinyl = require('../models/Vinyl')
 
 const REQUIRED_VALIDATION_MESSAGE = '{PATH} is required'
 
@@ -9,8 +10,8 @@ let userSchema = new mongoose.Schema({
   salt: String,
   password: String,
   roles: [String],
-  likedVinyls: [{type: mongoose.Schema.Types.ObjectId, required: REQUIRED_VALIDATION_MESSAGE}],
-  dislikedVinyls: [{type: mongoose.Schema.Types.ObjectId, required: REQUIRED_VALIDATION_MESSAGE}],
+  likedVinyls: [{type: mongoose.Schema.Types.ObjectId, ref:'Vinyl', required: REQUIRED_VALIDATION_MESSAGE}],
+  dislikedVinyls: [{type: mongoose.Schema.Types.ObjectId,ref:'Vinyl', required: REQUIRED_VALIDATION_MESSAGE}],
 
 })
 

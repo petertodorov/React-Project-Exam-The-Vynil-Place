@@ -1,0 +1,74 @@
+.Vinyls-container {
+    text-align: center;
+  }
+
+
+  .Vinyls-container h1, h3 {
+    margin:0.2em auto;
+  }
+
+  .Vinyls-container ul.vinyls {
+    display: flex;
+    margin: 0 auto;
+    width: 70%;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+  .Vinyls-container li.vinyl {
+    display: grid;
+  width:300px;
+  }
+
+  .Vinyls-container img {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .Vinyls-container .info{  
+    width: 90%;
+    margin:0 auto;
+    text-align: center;  
+    padding-bottom: 0.5em;
+  }
+  
+  
+  .Vinyls-container .Link {
+    width: 70%;
+    margin:0 auto;
+    border: none;
+    text-align: center;  
+    font-size: 16px;
+    text-decoration: none;
+    background: lightgrey;
+    color: white;
+    border-radius: 7px;
+    margin-bottom: 0.5em; 
+    box-shadow: none; 
+    padding: 5px 20px;
+  }
+  .Vinyls-container .fa.fa-thumbs-up.Link,.fa.fa-thumbs-down.Link {
+    width:84%;
+    padding: 5px 20px;      
+}
+ 
+
+  .Vinyls-container .Link:hover{
+    color: white;
+    background: darkgray;
+  }
+
+  .Edit{
+    display:inline-block;
+    width: 16%;
+    margin:2em 0.2em;
+    border: none;
+    text-align: center;  
+    font-size: 16px;
+    text-decoration: none;
+    background: lightgrey;
+    color: white;
+    border-radius: 7px;
+    box-shadow: none; 
+    padding: 10px 20px;
+  }

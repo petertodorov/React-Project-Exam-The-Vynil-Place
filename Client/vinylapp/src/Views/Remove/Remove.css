@@ -15,7 +15,7 @@
   }
   
  
-  .Home img {
+  .Remove img {
     margin: 0 auto;
     max-width: 200px;
     max-height: 180px;
@@ -29,8 +29,8 @@
   h4{
       margin:0.3em auto;
   }
-  .Link{  
-    width: 60%;
+  .Remove .Link{  
+    width: 70%;
     margin:15px auto;
     border: none;
     text-align: center;  
@@ -43,7 +43,7 @@
     padding: 10px 20px;
   }
   
-  .Link:hover{
+  .Remove .Link:hover{
     color: white;
     background: darkgray;
   }

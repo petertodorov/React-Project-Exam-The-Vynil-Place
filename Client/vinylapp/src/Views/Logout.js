@@ -8,8 +8,7 @@ class Logout extends Component  {
     }
 
     render(){
-        toast.success("Logout successful!");
-        return <Redirect to="/about"/>
+        toast.success("Logout successful!");       
     }
 }
 export default Logout;
