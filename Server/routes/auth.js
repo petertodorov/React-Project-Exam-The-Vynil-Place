@@ -41,7 +41,7 @@ function validateLoginForm (payload) {
     errors.push( 'Please enter a valid username.')
   }
 
-  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length === 0) {
+  if (!payload || typeof payload.password !== 'string' || payload.password.trim().length <3) {
     isFormValid = false
     errors.push( 'Please enter a valid password.')
   }
@@ -95,7 +95,7 @@ router.post('/signin', (req, res, next) => {
       if (err.name === 'IncorrectCredentialsError') {
         return res.status(200).json({
           success: false,
-          message: err.message
+          message: err
         })
       }
 

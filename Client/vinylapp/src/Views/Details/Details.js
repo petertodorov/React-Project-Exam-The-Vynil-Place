@@ -31,7 +31,7 @@ class Details extends Component {
         const { title, artist, genre, year, image, likes, dislikes } = this.state.vinyl;
         console.log(title);
         if (!this.props.user.isLoggedIn) {
-            return <Redirect to="/home" />;
+            return <Redirect to="/auth/login" />;
         }
 
         

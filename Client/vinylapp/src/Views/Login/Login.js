@@ -52,7 +52,7 @@ class Login extends Component {
                         placeholder="***"
                         onChange={this.onChangeHandler}
                         value={this.state.password} />
-                    <input type="submit" value="Login" />
+                    <input type="submit"  value="Login" />
                 </form>
             </div>
         );

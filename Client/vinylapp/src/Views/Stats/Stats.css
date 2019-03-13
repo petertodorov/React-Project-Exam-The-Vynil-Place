@@ -1,33 +1,50 @@
-.Home {
+.Stats {
     text-align: center;
   }
   
-  .Home ul.movies {
+  .Stats ul.Users{    
     display: flex;
-    margin: 0 auto;
-    width: 50%;
+    flex-direction:row;
+    margin: 1em auto;
+    width: 70%;
     justify-content: space-evenly;
     flex-wrap: wrap;
-  }
-  
-  .Home li.movie {
-    display: grid;
-  width:270px;
-  
+    list-style-type:none;
   }
 
-  
-  .Home .trailer {
-    margin: 0 auto;
+  .Stats li.UserRow{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-evenly;    
+    border: 2px solid lightgray;
+    margin-bottom:2px;
+    width:100%;
+    padding:1em;
   }
-  
+
+  .Stats li.Vinyl {
+    display: inline-block;
+    width:160px;
+  }
+
+  .Stats .EmptyBox{
+    width:150px;
+    height:150px;
+    list-style-type:none;
+    margin-top:6em;
+    text-align:center;
+  }
+ 
   .Stats img {
     margin: 1em auto;
-    width: 200px;
-    max-height: 300px;
+    width: 150px;
+    height: 150px;
     margin-bottom:1em;
   }
-  
+  .Stats .GoToLink{
+    text-decoration: none;
+    color:darkgray;
+  }
   .Stats .Link{  
     width: 60%;
     margin:0 auto;

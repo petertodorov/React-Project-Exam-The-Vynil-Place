@@ -63,8 +63,11 @@ class Create extends Component {
 
     render() {
         const { user } = this.props;
-        if (!user.isAdmin || this.state.redirect) {
+        if (!user.isAdmin ) {
             return <Redirect to="/home" />;
+        }
+        if(this.state.redirect){
+            return <Redirect to="/vinyls" />;
         }
 
         return (

@@ -47,6 +47,16 @@ class App extends Component {
           isAdmin: JSON.parse(localStorage.getItem('isAdmin')),
         },
       });
+    } else {
+      this.setState({
+        user: {
+          isLoggedIn: false,
+          username: '',
+          userId: '',
+          token: '',
+          isAdmin: false,
+        },
+      });
     }
   }
 
@@ -54,7 +64,15 @@ class App extends Component {
     try {
       let data = await App.authService.signIn(user);
       if (!data.success || !data.userData.username) {
-         toast.error(data.message);
+        if(data.message.name){
+          toast.error(data.message.name);
+        }
+
+        if (data.errors) {
+          data.errors.forEach((err) => {
+            toast.error(err);
+          });
+        }
         return;
       }
       if (data.token) {
@@ -73,26 +91,23 @@ class App extends Component {
     }
   }
 
-  logout(event) {
-    event.preventDefault();
+  logout() {
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
     localStorage.removeItem('isLoggedIn')
     localStorage.removeItem('isAdmin');
-
-    this.setState({
-      user: {
-        isLoggedIn: false,
-        username: '',
-        userId: '',
-        token: '',
-        isAdmin: false,
-      },
-    });
+    this.updateState()
+    // this.setState({
+    //   user: {
+    //     isLoggedIn: false,
+    //     username: '',
+    //     userId: '',
+    //     token: '',
+    //     isAdmin: false,
+    //   },
+    // });
     toast.success("Logout successful!");
-    // return <Redirect to="/home" />;
-
   }
 
   componentDidMount() {
@@ -114,17 +129,17 @@ class App extends Component {
               <Route exact path="/" render={() => <Home user={this.state.user} />} />
               <Route exact path="/home" render={() => <Home user={this.state.user} />} />
               <Route exact path="/vinyls" render={() => <Vinyls user={this.state.user} />} />
-              
+
               <Route exact path="/stats/users" render={() => <Stats user={this.state.user} />} />
               <Route exact path="/about" component={About} />
               <Route exact path="/auth/login" render={() => <Login login={this.login} user={this.state.user} />} />
               <Route exact path="/auth/register" render={() => <Register login={this.login} user={this.state.user} />} />
               <Route exact path="/vinyl/create" render={() => <Create user={this.state.user} />} />
-              <Route exact path="/vinyl/details/:id" render={(props) => <Details {...props} user={this.state.user}/>} />
-              <Route exact path="/vinyl/edit/:id" render={(props) => <Edit {...props} user={this.state.user}/>} />
-              <Route exact path="/vinyl/delete/:id" render={(props) => <Remove {...props} user={this.state.user}/>} />
-   
-   
+              <Route exact path="/vinyl/details/:id" render={(props) => <Details {...props} user={this.state.user} />} />
+              <Route exact path="/vinyl/edit/:id" render={(props) => <Edit {...props} user={this.state.user} />} />
+              <Route exact path="/vinyl/delete/:id" render={(props) => <Remove {...props} user={this.state.user} />} />
+
+
               <Route component={NotFound} />
             </Switch>
           </Fragment>

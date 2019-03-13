@@ -24,7 +24,7 @@ const Header = (props) => {
                 <NavLink exact to="/vinyls" className="link">Vinyls</NavLink>
                 <NavLink exact to="/stats/users" className="link" >Stats</NavLink>
 
-                                <NavLink exact to="#" className="link" onClick={props.logout}>Logout</NavLink>
+                                <NavLink exact to="/" className="link" onClick={props.logout}>Logout</NavLink>
                             </Fragment>)
                             :
                             (<Fragment>

@@ -18,6 +18,8 @@
   .Vinyls-container li.vinyl {
     display: grid;
   width:300px;
+    margin-bottom:2em;
+
   }
 
   .Vinyls-container img {

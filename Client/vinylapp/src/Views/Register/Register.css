@@ -11,23 +11,30 @@
   .Register input {
     padding: 10px;
     margin-bottom: 20px;
+   border-radius:0.5em;
+   border:2px solid darkgrey;
+  }
+
+  .Register input:focus{
+    outline:none;
+    border:4px solid darkgrey;
   }
   
   .Register input[type="submit"]{  
-    width: 25%;
+    width: 50%;
     margin:0 auto;
-    border: 2px solid dodgerblue;
+    border: none;
     text-align: center;  
-    font-size: 14px;
-    background: dodgerblue;
+    font-size: 16px;
+    background: lightgray;
     color: white;
     border-radius: 7px;
     margin-top: 20px; 
-    box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.5); 
+    box-shadow: none;  
   }
   
   .Register input[type="submit"]:hover{
-    color: dodgerblue;
-    background: transparent;
+    color: white;
+    background: darkgray;
   }
   

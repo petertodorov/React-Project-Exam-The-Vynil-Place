@@ -2,7 +2,7 @@ function request(method) {
     const getAuthHeader = ()=>{
      const token =localStorage.getItem('token'); 
         if( token &&  token.length){
-            console.log(`token is=> ${token}`);
+            console.log('token found');
             return `Bearer ${token}`
         }else{
             console.log('no token found');
