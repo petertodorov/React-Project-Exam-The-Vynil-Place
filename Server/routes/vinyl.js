@@ -201,13 +201,13 @@ router.post('/likes/:id', authCheck, (req, res) => {
             if (user.likedVinyls.indexOf(id) >= 0) {
               return res.status(200).json({
                 success: false,
-                message: 'You cannnot like twice the same vinyl.'
+                message: 'You cannnot like the same vinyl twice.'
               })
             }
             if (user.dislikedVinyls.indexOf(id) >= 0) {
               return res.status(200).json({
                 success: false,
-                message: 'You have already disliked the vinyl.'
+                message: 'You have already disliked this vinyl.'
               })
             }
           } 
@@ -268,14 +268,14 @@ router.post('/dislikes/:id', authCheck, (req, res) => {
           if (user.dislikedVinyls.indexOf(id) >= 0) {
             return res.status(200).json({
               success: false,
-              message: 'You cannnot dislike twice the same vinyl.'
+              message: 'You cannnot dislike the same vinyl twice.'
             })
           }
 
           if (user.likedVinyls.indexOf(id) >= 0) {
             return res.status(200).json({
               success: false,
-              message: 'You have alreay liked the vinyl.'
+              message: 'You have alreay liked this vinyl.'
             })
           }
         }
