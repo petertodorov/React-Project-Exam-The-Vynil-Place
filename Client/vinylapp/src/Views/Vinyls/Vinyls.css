@@ -25,7 +25,14 @@
   .Vinyls-container img {
     width: 250px;
     height: 250px;
+    border-radius:1em;
+    overflow: hidden;
   }
+  
+  .Vinyls-container img:hover {
+    opacity:0.5;
+  }
+  
   
   .Vinyls-container .info{  
     width: 90%;
@@ -60,7 +67,7 @@
     background: darkgray;
   }
 
-  .Edit{
+  .Edit, .Delete{
     display:inline-block;
     width: 16%;
     margin:2em 0.2em;
@@ -74,3 +81,12 @@
     box-shadow: none; 
     padding: 10px 20px;
   }
+  .Edit:hover {
+    background: darkgrey;
+    }
+  .Delete {
+  background: red;
+  }
+  .Delete:hover {
+    background: darkred;
+    }

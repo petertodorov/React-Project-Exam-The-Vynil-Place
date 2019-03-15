@@ -9,9 +9,9 @@ function validateSignupForm (payload) {
   let isFormValid = true
   let message = ''
 
-  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length < 3) {
+  if (!payload || typeof payload.username !== 'string' || payload.username.trim().length < 3 || payload.username.trim().length > 10) {
     isFormValid = false
-    errors.push ('Username must be at least 3 characters long')
+    errors.push ('Username must be 3 to 10 characters long')
   }
 
   if (!payload || typeof payload.email !== 'string' || !validator.isEmail(payload.email)) {
@@ -92,7 +92,7 @@ router.post('/signin', (req, res, next) => {
   return passport.authenticate('local-login', (err, token, userData) => {
     if (err) {
       console.log(err);
-      if (err.name === 'IncorrectCredentialsError') {
+      if (err.name === 'IncorrectCredentials') {
         return res.status(200).json({
           success: false,
           message: err

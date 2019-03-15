@@ -11,7 +11,7 @@ const Header = (props) => {
                   props.user.isLoggedIn ?
                             (<Fragment>
 
-                                <NavLink to="#" className="link">Welcome {props.user.username}!</NavLink>
+                                <NavLink to="#" className="link">Welcome, {props.user.username}!</NavLink>
                                 {props.user.isAdmin ?
                                     (
                                         <Fragment>

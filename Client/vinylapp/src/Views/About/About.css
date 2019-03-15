@@ -1,13 +1,13 @@
-.About-container {
+.About {
     text-align: center;  
 }
   
-.About-container > p {
+.About > p {
  padding: 0.2em;
   }
   
   
-  .About-container img {
+  .About img {
     margin: 0 auto;
     width: 200px;
     max-height: 200px;

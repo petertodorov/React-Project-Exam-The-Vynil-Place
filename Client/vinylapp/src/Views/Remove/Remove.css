@@ -1,8 +1,8 @@
-.Details {
+.Remove{
     text-align: center;
   }
   
-  .Vinyl {
+  .Remove .Vinyl {
     display: flex;
     margin: 0 auto;
     width: 50%;
@@ -10,28 +10,42 @@
     flex-wrap: wrap;
   }
   
-  .Vinyl {
+.Remove .Vinyl {
     display: grid;
   }
   
  
   .Remove img {
-    margin: 0 auto;
-    max-width: 200px;
-    max-height: 180px;
-    margin-bottom:2em;
+    margin: 1em auto;
+    width: 250px;
+    height: 250px;
+    border-radius:1em;
+    overflow: hidden;
+  }
+  .Remove >.Vinyl h3{
+    width: 60%;
+  }
+
+  #Confirm{
+    width: 60%;
+    margin:1em auto;
+    border: none;
+    text-align: center;  
+    font-size: 16px;
+    text-decoration: none;
+    background: red;
+    color: white;
+    border-radius: 7px;
+    box-shadow: none; 
+    padding: 10px 20px;
   }
   
-  h2{
-    margin:0.1em auto;
-
+  #Confirm:hover{
+    background: darkred;
   }
-  h4{
-      margin:0.3em auto;
-  }
-  .Remove .Link{  
-    width: 70%;
-    margin:15px auto;
+  #Cancel{
+    width: 60%;
+    margin: auto;
     border: none;
     text-align: center;  
     font-size: 16px;
@@ -41,9 +55,9 @@
     border-radius: 7px;
     box-shadow: none; 
     padding: 10px 20px;
+    
   }
   
-  .Remove .Link:hover{
-    color: white;
+  #Cancel:hover{
     background: darkgray;
   }

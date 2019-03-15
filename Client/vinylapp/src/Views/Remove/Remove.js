@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect,NavLink } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import VinylService from '../../services/vinylService'
 import './Remove.css'
@@ -11,7 +11,7 @@ class Remove extends Component {
                 title: '',
                 artist: '',
                 image: '',
-               
+
             },
             redirect: false,
         };
@@ -23,7 +23,6 @@ class Remove extends Component {
     deleteHandler(event) {
         this.vinylService.removeVinyl(this.state.vinyl)
             .then((data) => {
-                console.log(data);
                 if (data.success) {
                     toast.success(data.message);
                     this.setState({
@@ -50,23 +49,22 @@ class Remove extends Component {
 
     render() {
         const { user } = this.props;
-        const {  artist, image } = this.state.vinyl;
+        const { artist, image } = this.state.vinyl;
         if (!user.isAdmin || this.state.redirect) {
-            return <Redirect to="/home" />;
+            return <Redirect to="/vinyls" />;
         }
         return (
-           <div>
-                <div className="Details">
-       
-                    <h2>Artist: {artist}</h2>
-                </div>
+
+            <div className="Remove">
+                <h2>Artist: {artist}</h2>
                 <div className="Vinyl">
                     <img src={image} alt="cover" />
                     <h3>Are you sure you want to delete this vinyl?</h3>
-                    <button className="Link" onClick={this.deleteHandler}>Yes</button>
-                    <NavLink to="/home" className="Link">No</NavLink>
+                    <NavLink to="#" id="Confirm" onClick={this.deleteHandler}>Yes</NavLink>
+                    <NavLink to="/vinyls" id="Cancel">No</NavLink>
                 </div>
             </div>
+
         );
     }
 }

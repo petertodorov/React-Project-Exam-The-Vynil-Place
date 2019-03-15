@@ -40,7 +40,6 @@ class Create extends Component {
     vinylService = new VinylService();
     onSubmitHandler(event) {
         event.preventDefault();
-        console.log(this.state.vinyl);
         this.vinylService.createVinyl(this.state.vinyl)
             .then((data) => {
                 if (data.success) {
@@ -63,10 +62,10 @@ class Create extends Component {
 
     render() {
         const { user } = this.props;
-        if (!user.isAdmin ) {
-            return <Redirect to="/home" />;
+        if (!user.isAdmin) {
+            return <Redirect to="/vinyls" />;
         }
-        if(this.state.redirect){
+        if (this.state.redirect) {
             return <Redirect to="/vinyls" />;
         }
 
@@ -74,34 +73,47 @@ class Create extends Component {
             <div className="Create">
                 <h1>Create Vinyl</h1>
                 <form onSubmit={this.onSubmitHandler} >
-                    <label htmlFor="title">Title</label>
-                    <input type="text" id="title" name="title" placeholder="Enter title"
-                        onChange={this.onChangeHandler}
-
-                        value={this.state.title} />
-
                     <label htmlFor="artist">Artist</label>
-                    <input type="text" id="artist" name="artist" placeholder="Enter artist"
+                    <input type="text"
+                        id="artist"
+                        name="artist"
+                        placeholder="Enter artist"
                         onChange={this.onChangeHandler}
                         value={this.state.artist} />
 
-                    <label htmlFor="genre">Genre</label>
-                    <input type="text" id="genre" name="genre" placeholder="Rock, World, Alternative, Other"
+                    <label htmlFor="title">Title</label>
+                    <input type="text" id="title" name="title"
+                        placeholder="Enter title"
                         onChange={this.onChangeHandler}
-                        value={this.state.genre} />
+                        value={this.state.title} />
 
+                    <label htmlFor="genre">Genre</label>
+                    <select type="text"
+                        id="genre"
+                        name="genre"
+                        onChange={this.onChangeHandler}>
+                        <option className="optionInput">Rock</option>
+                        <option className="optionInput">World</option>
+                        <option className="optionInput">Alternative</option>
+                        <option className="optionInput" >Other</option>
+                    </select>
                     <label htmlFor="year">Year</label>
-                    <input type="number" id="year" name="year" placeholder="Enter year"
+                    <input type="number"
+                        id="year"
+                        name="year"
+                        placeholder="Enter year"
                         onChange={this.onChangeHandler}
                         value={this.state.year} />
 
-
                     <label htmlFor="image">Image Url</label>
-                    <input type="text" id="image" name="image" placeholder="Enter image url"
+                    <input type="text"
+                        id="image"
+                        name="image"
+                        placeholder="Enter image url"
                         onChange={this.onChangeHandler}
                         value={this.state.image} />
 
-                    <input type="submit" value="Create" />
+                    <input type="submit" className="createButton" value="Create" />
                 </form>
             </div>
         );

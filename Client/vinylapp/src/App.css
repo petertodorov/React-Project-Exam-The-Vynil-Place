@@ -43,12 +43,18 @@ body {
 
 .App header .link:hover {
   background-color: lightblue;
+  border-radius:0.3em;
   color: white;
+  margin-left:0.1em;
+  margin-right:0.1em;
 }
 
 .App header .link.active {
   background-color: lightblue;
   color: white;
+  border-radius:0.3em;
+  margin-left:0.1em;
+  margin-right:0.1em;
 }
 
 .App header .header-right {
