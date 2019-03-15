@@ -1,4 +1,117 @@
 .Stats {
+  text-align: center;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Stats h1{
+  width:100%;
+}
+.Stats h3{
+  margin-bottom:0.5em;
+  width:100%;
+}
+.Stats ul.Users{    
+  width: 95%;
+  margin:0;
+  padding:0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style-type:none;
+}
+
+
+.Stats li.UserRow{
+  border: 1px solid lightgray;
+border-radius:0.3em;
+  margin-bottom:4px;
+  width:100%;
+  /* padding:0.5em; */
+  display:flex;
+  flex-wrap: wrap;
+
+  justify-content: space-evenly;
+  align-content: center;
+}
+
+
+.Stats ul.VinylsList{
+  flex-wrap: wrap;
+  flex:1;
+  margin:0;
+  padding:0;
+  display: flex;
+  justify-content: space-between;
+  list-style-type:none;
+}
+
+
+.Stats li.Vinyl {
+  display:flex;
+  justify-content: center;
+  width:160px;
+}
+
+.Stats .EmptyBox{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:150px;
+  height:150px;
+  list-style-type:none;
+  text-align:center;
+}
+
+.Stats ul li div img {
+  margin: 0.5em auto;
+  width: 130px;
+  height: 130px;
+  margin-bottom:1em;
+}
+.Stats .GoToLink{
+  text-decoration: none;
+  color:darkgray;
+}
+.Stats .Link{  
+  width: 60%;
+  margin:0 auto;
+  border: none;
+  text-align: center;  
+  font-size: 16px;
+  text-decoration: none;
+  background: lightgrey;
+  color: white;
+  border-radius: 7px;
+  margin-top: 100px; 
+  box-shadow: none; 
+  padding: 10px 20px;
+}
+
+.Link:hover{
+  color: white;
+  background: darkgray;
+}
+
+.Edit{
+  display:inline-block;
+  width: 16%;
+  margin:2em 0.2em;
+  border: none;
+  text-align: center;  
+  font-size: 16px;
+  text-decoration: none;
+  background: lightgrey;
+  color: white;
+  border-radius: 7px;
+  box-shadow: none; 
+  padding: 10px 20px;
+}
+
+
+/* 
+.Stats {
     text-align: center;
     display:flex;
     flex-wrap: wrap;
@@ -25,10 +138,10 @@
 
   .Stats li.UserRow{
     border: 1px solid lightgray;
-  border-radius:0.3em;
+  border-radius:0.5em;
     margin-bottom:4px;
     width:100%;
-    /* padding:0.5em; */
+     padding:0.5em; 
     display:flex;
     flex-wrap: wrap;
 
@@ -69,6 +182,8 @@
     width: 130px;
     height: 130px;
     margin-bottom:1em;
+    border-radius:1em;
+    overflow: hidden;
   }
   .Stats .GoToLink{
     text-decoration: none;
@@ -107,4 +222,4 @@
     border-radius: 7px;
     box-shadow: none; 
     padding: 10px 20px;
-  }
+  }  */

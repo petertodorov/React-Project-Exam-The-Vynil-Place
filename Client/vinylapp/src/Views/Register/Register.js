@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import './Register.css';
 import AuthService from '../../services/authService'
+import './Register.css';
 
 class Register extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class Register extends Component {
 
   render() {
     if (this.props.user.isLoggedIn) {
-      return <Redirect to="/" />;
+      return <Redirect to="/vinyls" />;
     }
 
     return (
@@ -63,11 +63,26 @@ class Register extends Component {
         <h1>Register</h1>
         <form onSubmit={this.onSubmitHandler}>
           <label htmlFor="username">Username</label>
-          <input type="text" id="username" name="username" placeholder="Ivan Ivanov" onChange={this.onChangeHandler} value={this.state.username} />
+          <input type="text"
+            id="username"
+            name="username"
+            placeholder="Your Username"
+            onChange={this.onChangeHandler}
+            value={this.state.username} />
           <label htmlFor="email">Email</label>
-          <input type="text" id="email" name="email" placeholder="ivan@gmail.com" onChange={this.onChangeHandler} value={this.state.email} />
+          <input type="text"
+            id="email"
+            name="email"
+            placeholder="Your Email"
+            onChange={this.onChangeHandler}
+            value={this.state.email} />
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="******" onChange={this.onChangeHandler} value={this.state.password} />
+          <input type="password"
+            id="password"
+            name="password"
+            placeholder="Your password (min. 3 symbols)"
+            onChange={this.onChangeHandler}
+            value={this.state.password} />
           <input type="submit" value="Register" />
         </form>
       </div>

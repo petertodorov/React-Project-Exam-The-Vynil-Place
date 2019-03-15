@@ -15,21 +15,20 @@
   }
   
  
-  .Details img {
-    margin: 0 auto;
-    max-width: 200px;
-    max-height: 180px;
-    margin-bottom:2em;
+  .Vinyl img {
+    
+    margin: 1em auto;
+    width: 250px;
+    height: 250px;
+    border-radius:1em;
+    overflow: hidden;
   }
   
-  h2{
-    margin:0.1em auto;
-
-  }
+  
   h4{
       margin:0.3em auto;
   }
-  .Details .Link {
+  .Vinyl .Link {
     width: 70%;
     margin:0 auto;
     border: none;
@@ -44,7 +43,7 @@
     padding: 10px 20px;
   }
   
-  .Link:hover{
+ .Vinyl> .Link:hover{
     color: white;
     background: darkgray;
   }

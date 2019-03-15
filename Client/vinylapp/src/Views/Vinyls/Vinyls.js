@@ -95,7 +95,7 @@ class Vinyls extends Component {
                                         ?
                                         (<span>
                                             <NavLink to={`/vinyl/edit/${vinyl._id}`} className="Edit">Edit</NavLink>
-                                            <NavLink to={`/vinyl/delete/${vinyl._id}`} className="Edit">Delete</NavLink>
+                                            <NavLink to={`/vinyl/delete/${vinyl._id}`} className="Delete">Delete</NavLink>
                                         </span>)
                                         :
                                         (null)

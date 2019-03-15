@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect,NavLink } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import VinylService from '../../services/vinylService'
 import './Edit.css'
@@ -73,7 +73,7 @@ class Edit extends Component {
         const { user } = this.props;
         const { title, genre, artist, year, image } = this.state.vinyl;
         if (!user.isAdmin || this.state.redirect) {
-            return <Redirect to="/home" />;
+            return <Redirect to="/vinyls" />;
         }
 
         return (
@@ -89,11 +89,23 @@ class Edit extends Component {
                     <input type="text" id="artist" name="artist"
                         onChange={this.onChangeHandler}
                         value={artist} />
-
+            
                     <label htmlFor="genre">Genre</label>
-                    <input type="text" id="genre" name="genre"
+                    <select type="text"
+                        id="genre"
+                        name="genre"
+                        value={genre}
+                        onChange={this.onChangeHandler}>
+                        <option className="optionInput">Rock</option>
+                        <option className="optionInput">World</option>
+                        <option className="optionInput">Alternative</option>
+                        <option className="optionInput" >Other</option>
+                    </select>
+          
+            
+                    {/* <input type="text" id="genre" name="genre"
                         onChange={this.onChangeHandler}
-                        value={genre} />
+                        value={genre} /> */}
 
                     <label htmlFor="storyLine">Year</label>
                     <input type="number" id="year" name="year" placeholder="Enter year"
@@ -106,7 +118,8 @@ class Edit extends Component {
                         onChange={this.onChangeHandler}
                         value={image} />
 
-                    <input type="submit" value="Edit" />
+                    <input type="submit" className="Button" value="Edit" />
+                    <NavLink exact to ="/vinyls" className="Back">Back to Vinyls</NavLink>
                 </form>
             </div>
         );

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
 import './Login.css';
 
 class Login extends Component {
@@ -31,7 +33,7 @@ class Login extends Component {
 
     render() {
         if (this.props.user.isLoggedIn) {
-            return <Redirect to="/" />;
+            return <Redirect to="/vinyls" />;
         }
 
         return (
