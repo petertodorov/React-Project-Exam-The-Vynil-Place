@@ -1,68 +1,28 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Open your terminal and run npm install in both 'resources/clinent/vinylapp' and 'resources/server' to get the needed packages
 
-In the project directory, you can run:
+To run the server go to resources/server open new terminal  and run:
+'node index' or 'nodemon index'
 
-### `npm start`
+To run the app go to resources/clinent/vinylapp  open terminal and run:
+ `npm start`
 
-Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+I have used react-router-dom for handling the dynamic routing of the app and react-toastify for showing the differnet messages/errors based on the interaction with the server 
 
-### `npm test`
+the Client folder contains the app and all related components and views as well as auth/vinyl and stats services for communication and data exchange with the server 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The server folder - contains the back-end and the logic related to it Server is implemented with Express with passport authentication and mongoDB)
 
-### `npm run build`
+The app is called 'The Vinyl Place'
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+It is A place to check a vinyl collection and vote (like dislike) vinyls.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Admin functionalities: The admin is seeded authomatically when running the app. Once the admin is logged he/she can Create/edit/delete vinyls  the admin cannot  cannot vote for any vinyl).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Regular user - to become one you have to register. Once you do it you are automatically logged in and you can vote and see the vinyls' details. You can like or dislike a vinyl only once. You can either like a vinyl or dislike it, you cannot do both for the same vinyl. Your loggin session expaires afer 1 hour. In order to end up your session you have to logg ouy
 
-### `npm run eject`
+Anonimous users - can only see the list of vinyls and the stats. Cannot vote and cannot see details of a vinyl
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
