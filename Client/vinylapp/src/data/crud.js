@@ -8,7 +8,7 @@ function request(method) {
             console.log('no token found');
             return {}
         }
-    }
+    };
 
     return async (url, data = {}, options = {}) => {
         try{
@@ -23,12 +23,13 @@ function request(method) {
                 body: Object.keys(data).length ? JSON.stringify(data) : undefined,
                 ...options
             });
+            if(response.status===401){
+                alert('One hour has passed, can you please log in again')
+            }
             return response.json();
-
         }catch(err){
             alert(err)}
         }
-       
     };
 
 export const get = request('get');

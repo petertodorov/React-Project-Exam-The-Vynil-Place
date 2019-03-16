@@ -91,7 +91,9 @@ class Create extends Component {
                     <select type="text"
                         id="genre"
                         name="genre"
+                    
                         onChange={this.onChangeHandler}>
+                        <option value="" className="optionInput" disabled selected>Choose a genre</option>
                         <option className="optionInput">Rock</option>
                         <option className="optionInput">World</option>
                         <option className="optionInput">Alternative</option>

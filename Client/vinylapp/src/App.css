@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +6,16 @@ body {
   sans-serif;
 }
 
+
+.App{
+  height:100vh;  
+  display:flex;
+  flex-direction: column;
+}
+
+.App main{
+  flex:1 0 auto;
+}
 .App p {
   width: 50%;
   margin: 0 auto;
@@ -20,10 +29,28 @@ body {
    overflow: hidden;
    background-color: #f1f1f1;
    padding: 0 50px;
-   
+  flex-shrink:0;
 }
 
-.App header  .link {
+.App footer {
+  overflow: hidden;
+  background-color:  #f1f1f1;
+  color:rgb(109, 109, 109);
+  flex-shrink:0;
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+#root > div > footer > a{
+  color:rgb(109, 109, 109);  
+  text-decoration: none;
+  font-size: 16px;  
+  padding:0.2em;
+}
+
+
+.App header .link {
   float: left;
   color: black;
   text-align: center;

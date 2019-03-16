@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
 import Header from './Components/Header/Header'
+import Footer from './Components/Footer/Footer'
 
 import About from './Views/About/About'
 import Home from './Views/Home/Home'
@@ -128,6 +129,7 @@ class App extends Component {
                 <Route component={NotFound} />
               </Switch>
             </main>
+            <Footer/>
           </Fragment>
         </Router>
       </div>
