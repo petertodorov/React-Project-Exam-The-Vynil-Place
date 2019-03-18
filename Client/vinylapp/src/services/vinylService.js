@@ -9,6 +9,9 @@ class VinylService {
         this.removeUrl = `${this.baseUrl}/delete`;
         this.likeUrl = `${this.baseUrl}/likes`
         this.dislikeUrl = `${this.baseUrl}/dislikes`
+        this.getAllVinyls = this.getAllVinyls.bind(this);
+        this.likeVinyl = this.likeVinyl.bind(this);
+        this.dislikeVinyl = this.dislikeVinyl.bind(this);
     }
     getAllVinyls() {
         return get(this.allVinylsUrl);

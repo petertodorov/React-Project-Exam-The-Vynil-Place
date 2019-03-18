@@ -3,29 +3,11 @@ import { NavLink } from 'react-router-dom';
 import './Stats.css'
 
 import statsService from '../../services/statsService'
+import WithDataFromService from'../../hocs/WithDataFromService'
 
-class Stats extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            users: [],
-        };
-    }
-    statsService = new statsService();
-
-    componentDidMount() {
-        this.statsService.getAllUsers().then((data) => {
-            data = data.filter(user => !user.roles.includes('Admin'))
-            this.setState({
-                users: data,
-            });
-        }).catch(err => console.log(err));
-    }
-
-
-    render() {
-        if (!this.state.users.length && !this.props.user.isLoggedIn) {
-
+function Stats(props) {
+    
+        if (!props.users.length && !props.user.isLoggedIn) {
             return (
                 <div className="Stats" >
                     <h1>No reviewers</h1>
@@ -38,7 +20,7 @@ class Stats extends Component {
         return (
             <div className="Stats">
                 <h1>Statistics</h1>
-                {this.props.user.isLoggedIn ? null :
+                {props.user.isLoggedIn ? null :
                     (<div>
                         <h3>
                             Not a reviewer?<NavLink exact to="/auth/register" className="GoToLink"> Register here</NavLink>
@@ -47,7 +29,7 @@ class Stats extends Component {
                 }
                 <ul className="Users">
                     {
-                        this.state.users.map((user) => (
+                      props.users.map((user) => (
                             <Fragment>
                                 <li className="UserRow" key={user._id}>
                                     <div>
@@ -95,6 +77,7 @@ class Stats extends Component {
                 </ul>
             </div>
         );
-    }
+    
 }
-export default Stats;
+export default  WithDataFromService(Stats,[], new statsService().getAllUsers);
+ 
